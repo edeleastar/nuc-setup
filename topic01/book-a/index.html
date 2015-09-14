@@ -129,9 +129,12 @@ h3
 </ul>
 <p><img alt="Figure 1: Select a Linux Mint version to download" src="img/01.png"></p>
 <ul>
+<li>Download Rufus from <a href="https://rufus.akeo.ie/">here</a> and run it. No installation is required. Just double click on the downloaded file to launch it.</li>
 <li>Insert a key into any of the USB ports on your computer. This particular key should be not less than about 8 GB.</li>
-<li>Download Rufus from <a href="https://rufus.akeo.ie/">here</a> and run it. No installation is required. Just double click on the downloaded file to launch it. </li>
 <li>The key should appear in the Rufus window as shown in Figure 2 here.</li>
+<li>Ensure the key you inserted is recognized.</li>
+<li>Browse to the ISO image and select.</li>
+<li>Press Start.</li>
 </ul>
 <p><img alt="Rufus configured to write a bootable Linux install iso" src="img/02.png"></p>
 <p>When the copying has completed, safely remove the key from the USB port. </p>
@@ -185,8 +188,8 @@ h3
 <p><img alt="Figure 1: Download Java JDK" src="img/14.png">
 Create this script named installjdk in a folder - Downloads will do.</p>
 <ul>
-<li>This presumes we are downloading jdk-7u79-linux-x64.tar.gz.</li>
-<li>This file expands to a folder named jdk1.7.0_79.</li>
+<li>This presumes we have downloaded jdk-7u79-linux-x64.tar.gz to the Dowloads folder.</li>
+<li>This file expands to a folder named jdk1.7.0_79. It's not necessary to do this manually - the script below takes care of that.</li>
 </ul>
 <p>Filename: installjdk</p>
 <pre><code>#!/bin/bash
@@ -218,7 +221,7 @@ java -version
 </code></pre>
 
 <p>From the terminal in Downloads run this command to make the script executable:</p>
-<pre><code>sudo chmod 777 installjdk
+<pre><code>sudo chmod +x installjdk
 </code></pre>
 
 <p>Then run the script:</p>
@@ -243,7 +246,7 @@ sudo apt-get install ubuntu-make
 </code></pre>
 
 <p>Still from the terminal in Downloads run this command to make the script executable:</p>
-<pre><code>sudo chmod 777 installandroid
+<pre><code>sudo chmod +x installandroid
 </code></pre>
 
 <p>Then run the script:</p>
@@ -254,8 +257,8 @@ sudo apt-get install ubuntu-make
 <p>Launch Android Studio and wait while Studio downloads various packages and performs further configuration.</p>
 <p>When Android Studio intallation is completed update both Studio and Android SDK.</p>
 <ul>
-<li>If Studio is not yet visible in the menu, launch it using the file manager.<ul>
-<li>It is located at /opt/android-studio/bin.</li>
+<li>If Studio is not yet visible in the menu, launch it using the file manager:<ul>
+<li>/opt/android-studio/bin/studio.sh.</li>
 </ul>
 </li>
 </ul>
@@ -342,8 +345,8 @@ echo &quot;Check version installed git&quot;
 git --version
 </code></pre>
 
-<p>When git is first used and before a commit is made it is necessary to set the user's email. Here we are using a placeholder ictskills-01@wit.ie.</p>
-<pre><code>git config --global user.email ictskills-01@wit.ie
+<p>When git is first used and before a commit is made it is necessary to set the user's email. Here we are using a placeholder ictskills@wit.ie.</p>
+<pre><code>git config --global user.email ictskills@wit.ie
 </code></pre>
 
 <p>Create .bashrc file in $HOME and add these aliases:</p>
@@ -385,7 +388,7 @@ alias gitag=&quot;git log --no-walk --tags --pretty=format:' %C(yellow)%h %&lt;(
 <li>It assumes your keys are named <em>id_ictskills_rsa</em> and <em>id_ictskills_rsa.pub</em>.</li>
 </ul>
 </li>
-<li><a href="https://confluence.atlassian.com/bitbucket/add-an-ssh-key-to-an-account-302811853.html">Add the public key</a> <em>id_ictskills_rsa.pub</em> to your bitbucket BitBucket account.</li>
+<li><a href="https://confluence.atlassian.com/bitbucket/add-an-ssh-key-to-an-account-302811853.html">Add the public key</a> <em>id_ictskills_rsa.pub</em> to your BitBucket account.</li>
 <li>Ensure there is a test repo in BitBucket named <em>donation-android-2015</em>.</li>
 <li>Create file named <em>config</em> in the folder Downloads/ssh and add the following:</li>
 </ul>
@@ -394,7 +397,12 @@ alias gitag=&quot;git log --no-walk --tags --pretty=format:' %C(yellow)%h %&lt;(
 </code></pre>
 
 <ul>
-<li>Open a terminal, cd to ssh and run the script <em>installkeys</em></li>
+<li>
+<p>This file facilites addition of further key pairs to your system.</p>
+</li>
+<li>
+<p>Open a terminal, cd to ssh and run the script <em>installkeys</em></p>
+</li>
 </ul>
 <pre><code>sudo ./installconfigssh
 </code></pre>
@@ -402,8 +410,8 @@ alias gitag=&quot;git log --no-walk --tags --pretty=format:' %C(yellow)%h %&lt;(
 <p>Filename: installconfigssh</p>
 <pre><code>#!/bin/bash
 
-# This script requires that the keys are present in a folder named ssh which in the same folder as the script.
-# The sample keys provided are password protected (as is necessary): pwd is ictskills
+# This script requires that the keys are present in a folder named ssh which is located in the same folder as the script.
+# The sample keys provided are password protected (as is necessary): password for sample keys used here is ictskills
 
 echo &quot;Updating and installing openssh&quot;
 sudo apt-get update
@@ -609,7 +617,7 @@ sudo apt-get install unetbootinß
 <li>
 <p>Move the Systemback generated iso from /home to /root.</p>
 <ul>
-<li>The reason is that /root is the default location where the iso is sought when browse within the UNetbootin app.</li>
+<li>The reason is that /root is the default location where the iso is sought when browse within the UNetbootin app. Unless you run Unetbootin as root user.</li>
 </ul>
 </li>
 <li>
@@ -633,7 +641,7 @@ sudo dpkg -i dropbox_1.6.0_amd64.deb
 </code></pre>
 
 <p>Add:</p>
-<pre><code>@reboot @reboot ~/.dropbox-dist/dropboxd
+<pre><code>@reboot ~/.dropbox-dist/dropboxd
 </code></pre>
 
 <p>You may verify crontab correctly edited:</p>
